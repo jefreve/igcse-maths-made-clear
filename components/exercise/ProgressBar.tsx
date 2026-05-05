@@ -1,0 +1,65 @@
+'use client';
+
+import { CircleCheck as CheckCircle } from 'lucide-react';
+
+interface ProgressBarProps {
+  currentStep: number;
+  totalSteps: number;
+  stepTitles: string[];
+}
+
+export default function ProgressBar({ currentStep, totalSteps, stepTitles }: ProgressBarProps) {
+  return (
+    <div className="w-full">
+      {/* Step labels */}
+      <div className="flex items-center justify-between mb-3">
+        {stepTitles.map((title, idx) => {
+          const stepNum = idx + 1;
+          const isCompleted = stepNum < currentStep;
+          const isActive = stepNum === currentStep;
+
+          return (
+            <div key={idx} className="flex flex-col items-center gap-1.5 flex-1">
+              <div
+                className={`
+                  w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300
+                  ${isCompleted
+                    ? 'bg-gold text-navy-dark'
+                    : isActive
+                      ? 'bg-gold text-navy-dark ring-4 ring-gold/30'
+                      : 'bg-navy-light border border-white/20 text-white/40'}
+                `}
+                style={{ fontFamily: 'var(--font-spartan)' }}
+              >
+                {isCompleted ? <CheckCircle className="w-4 h-4" /> : stepNum}
+              </div>
+              <span
+                className={`text-xs text-center leading-tight hidden sm:block ${
+                  isActive ? 'text-gold font-semibold' : isCompleted ? 'text-white/60' : 'text-white/30'
+                }`}
+                style={{ fontFamily: 'var(--font-montserrat)' }}
+              >
+                {title}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Progress track */}
+      <div className="relative h-1.5 bg-navy-light rounded-full overflow-hidden">
+        <div
+          className="h-full bg-gold rounded-full transition-all duration-500 ease-out"
+          style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }}
+        />
+      </div>
+
+      {/* Step counter */}
+      <div className="flex justify-end mt-2">
+        <span className="text-white/40 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+          Step {currentStep} of {totalSteps}
+        </span>
+      </div>
+    </div>
+  );
+}
