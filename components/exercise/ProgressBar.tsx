@@ -24,10 +24,10 @@ export default function ProgressBar({ currentStep, totalSteps, stepTitles }: Pro
                 className={`
                   w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300
                   ${isCompleted
-                    ? 'bg-gold text-navy-dark'
+                    ? 'bg-gold text-white shadow-sm'
                     : isActive
-                      ? 'bg-gold text-navy-dark ring-4 ring-gold/30'
-                      : 'bg-navy-light border border-white/20 text-white/40'}
+                      ? 'bg-gold text-white ring-4 ring-gold/20 shadow-md'
+                      : 'bg-slate-100 border border-border text-muted-foreground/40'}
                 `}
                 style={{ fontFamily: 'var(--font-spartan)' }}
               >
@@ -35,7 +35,7 @@ export default function ProgressBar({ currentStep, totalSteps, stepTitles }: Pro
               </div>
               <span
                 className={`text-xs text-center leading-tight hidden sm:block ${
-                  isActive ? 'text-gold font-semibold' : isCompleted ? 'text-white/60' : 'text-white/30'
+                  isActive ? 'text-gold-dark font-bold' : isCompleted ? 'text-muted-foreground font-medium' : 'text-muted-foreground/30'
                 }`}
                 style={{ fontFamily: 'var(--font-montserrat)' }}
               >
@@ -47,16 +47,16 @@ export default function ProgressBar({ currentStep, totalSteps, stepTitles }: Pro
       </div>
 
       {/* Progress track */}
-      <div className="relative h-1.5 bg-navy-light rounded-full overflow-hidden">
+      <div className="relative h-1.5 bg-slate-100 rounded-full overflow-hidden border border-border/10">
         <div
-          className="h-full bg-gold rounded-full transition-all duration-500 ease-out"
+          className="h-full bg-gold rounded-full transition-all duration-500 ease-out shadow-[0_0_8px_rgba(255,195,0,0.4)]"
           style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }}
         />
       </div>
 
       {/* Step counter */}
       <div className="flex justify-end mt-2">
-        <span className="text-white/40 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+        <span className="text-muted-foreground/60 text-[10px] font-bold uppercase tracking-wider" style={{ fontFamily: 'var(--font-montserrat)' }}>
           Step {currentStep} of {totalSteps}
         </span>
       </div>

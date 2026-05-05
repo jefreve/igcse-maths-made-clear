@@ -27,11 +27,11 @@ export default function HintButton({
         onClick={onRequestHint}
         disabled={isDisabled}
         className={`
-          inline-flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-semibold
+          inline-flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-bold
           transition-all duration-150
           ${isDisabled
-            ? 'border-white/10 text-white/25 cursor-not-allowed'
-            : 'border-gold/40 text-gold hover:bg-gold/10 hover:border-gold/60 active:scale-95 cursor-pointer'}
+            ? 'border-border text-slate-300 bg-slate-50 cursor-not-allowed'
+            : 'border-gold/40 text-gold-dark bg-gold/5 hover:bg-gold/10 hover:border-gold/60 active:scale-95 cursor-pointer shadow-sm'}
         `}
         style={{ fontFamily: 'var(--font-montserrat)' }}
       >
@@ -49,14 +49,14 @@ export default function HintButton({
           <span
             key={i}
             className={`w-2 h-2 rounded-full transition-colors duration-200 ${
-              i < hintsUsed ? 'bg-gold/60' : 'bg-white/15'
+              i < hintsUsed ? 'bg-gold' : 'bg-slate-200'
             }`}
           />
         ))}
       </div>
 
       {exhausted && (
-        <span className="text-white/40 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+        <span className="text-muted-foreground text-xs font-medium" style={{ fontFamily: 'var(--font-montserrat)' }}>
           No hints remaining
         </span>
       )}

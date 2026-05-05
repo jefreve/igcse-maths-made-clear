@@ -23,24 +23,24 @@ export default function StepCard({
   return (
     <div
       className={`
-        bg-navy rounded-xl border transition-all duration-300
+        bg-white rounded-xl border transition-all duration-300
         ${isActive
-          ? 'border-gold/50 shadow-lg shadow-gold/5'
+          ? 'border-gold/50 shadow-lg shadow-gold/10'
           : isCompleted
-            ? 'border-success/30 opacity-80'
-            : 'border-white/10 opacity-50'}
+            ? 'border-success/30 opacity-100'
+            : 'border-border opacity-50'}
       `}
     >
       {/* Card header */}
-      <div className="flex items-start gap-4 p-5 border-b border-white/10">
+      <div className="flex items-start gap-4 p-5 border-b border-border">
         <div
           className={`
             w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm
             ${isCompleted
               ? 'bg-success text-white'
               : isActive
-                ? 'bg-gold text-navy-dark'
-                : 'bg-navy-light border border-white/20 text-white/40'}
+                ? 'bg-gold text-white'
+                : 'bg-slate-100 border border-border text-muted-foreground'}
           `}
           style={{ fontFamily: 'var(--font-spartan)' }}
         >
@@ -48,24 +48,24 @@ export default function StepCard({
         </div>
 
         <div className="flex-1 min-w-0">
-          <h3 className="text-white font-bold text-base mb-0.5"
+          <h3 className="text-foreground font-bold text-base mb-0.5"
             style={{ fontFamily: 'var(--font-montserrat)' }}>
             {title}
           </h3>
-          <p className="text-white/55 text-sm leading-relaxed"
+          <p className="text-muted-foreground text-sm leading-relaxed"
             style={{ fontFamily: 'var(--font-montserrat)' }}>
             {description}
           </p>
         </div>
 
         {isCompleted && (
-          <span className="flex-shrink-0 bg-success/15 text-success text-xs font-semibold px-2.5 py-1 rounded-full border border-success/30"
+          <span className="flex-shrink-0 bg-success/10 text-success text-xs font-semibold px-2.5 py-1 rounded-full border border-success/20"
             style={{ fontFamily: 'var(--font-montserrat)' }}>
             Done
           </span>
         )}
         {!isCompleted && !isActive && (
-          <Circle className="w-4 h-4 text-white/20 flex-shrink-0 mt-1" />
+          <Circle className="w-4 h-4 text-muted-foreground/30 flex-shrink-0 mt-1" />
         )}
       </div>
 

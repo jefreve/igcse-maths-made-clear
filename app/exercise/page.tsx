@@ -10,11 +10,11 @@ export default function ExercisePage() {
       <div className="space-y-6">
         {/* Page title */}
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-1"
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-1"
             style={{ fontFamily: 'var(--font-montserrat)' }}>
             Finding the Domain
           </h1>
-          <p className="text-white/50 text-sm"
+          <p className="text-muted-foreground text-sm"
             style={{ fontFamily: 'var(--font-montserrat)' }}>
             Work through each step carefully. You can ask for a hint at any time.
           </p>

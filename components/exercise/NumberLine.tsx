@@ -31,13 +31,13 @@ export default function NumberLine({ onSelectionChange, disabled = false }: Numb
       ${disabled ? 'cursor-not-allowed' : ''}
       ${isSelected
         ? 'bg-gold hover:bg-gold-dark'
-        : 'bg-navy-light border border-white/15 hover:bg-navy-lighter'}
+        : 'bg-slate-200 border border-border hover:bg-slate-300'}
     `;
   };
 
   return (
-    <div className="bg-navy-dark border border-white/10 rounded-xl p-5">
-      <p className="text-white/60 text-xs font-semibold tracking-widest uppercase mb-4"
+    <div className="bg-white border border-border rounded-xl p-5 shadow-sm">
+      <p className="text-muted-foreground text-xs font-bold tracking-widest uppercase mb-4"
         style={{ fontFamily: 'var(--font-montserrat)' }}>
         Number Line — click regions to select them
       </p>
@@ -56,7 +56,7 @@ export default function NumberLine({ onSelectionChange, disabled = false }: Numb
 
           {/* Critical point 3 */}
           <div className="flex flex-col items-center flex-shrink-0">
-            <div className="w-3 h-3 rounded-full bg-error border-2 border-error-light" />
+            <div className="w-3 h-3 rounded-full bg-error border-2 border-white shadow-sm" />
           </div>
 
           {/* Middle region */}
@@ -69,7 +69,7 @@ export default function NumberLine({ onSelectionChange, disabled = false }: Numb
 
           {/* Critical point 5 */}
           <div className="flex flex-col items-center flex-shrink-0">
-            <div className="w-3 h-3 rounded-full bg-error border-2 border-error-light" />
+            <div className="w-3 h-3 rounded-full bg-error border-2 border-white shadow-sm" />
           </div>
 
           {/* Right region */}
@@ -84,7 +84,7 @@ export default function NumberLine({ onSelectionChange, disabled = false }: Numb
         {/* Labels */}
         <div className="flex items-center gap-1">
           <div className="flex-1 flex justify-center">
-            <span className="text-white/50 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            <span className="text-muted-foreground text-xs font-medium" style={{ fontFamily: 'var(--font-montserrat)' }}>
               x &lt; 3
             </span>
           </div>
@@ -94,7 +94,7 @@ export default function NumberLine({ onSelectionChange, disabled = false }: Numb
             </span>
           </div>
           <div className="flex-1 flex justify-center">
-            <span className="text-white/50 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            <span className="text-muted-foreground text-xs font-medium" style={{ fontFamily: 'var(--font-montserrat)' }}>
               3 &lt; x &lt; 5
             </span>
           </div>
@@ -104,7 +104,7 @@ export default function NumberLine({ onSelectionChange, disabled = false }: Numb
             </span>
           </div>
           <div className="flex-1 flex justify-center">
-            <span className="text-white/50 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            <span className="text-muted-foreground text-xs font-medium" style={{ fontFamily: 'var(--font-montserrat)' }}>
               x &gt; 5
             </span>
           </div>
@@ -115,20 +115,20 @@ export default function NumberLine({ onSelectionChange, disabled = false }: Numb
       <div className="flex items-center gap-4 mt-2">
         <div className="flex items-center gap-1.5">
           <div className="w-3 h-3 rounded-full bg-error" />
-          <span className="text-white/40 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+          <span className="text-muted-foreground/60 text-xs font-medium" style={{ fontFamily: 'var(--font-montserrat)' }}>
             Excluded (open endpoint)
           </span>
         </div>
         <div className="flex items-center gap-1.5">
           <div className="w-6 h-2 rounded-sm bg-gold" />
-          <span className="text-white/40 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+          <span className="text-muted-foreground/60 text-xs font-medium" style={{ fontFamily: 'var(--font-montserrat)' }}>
             Selected region
           </span>
         </div>
       </div>
 
       {selected.size > 0 && (
-        <p className="mt-3 text-gold/80 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+        <p className="mt-3 text-gold-dark text-xs font-semibold" style={{ fontFamily: 'var(--font-montserrat)' }}>
           Selected: {Array.from(selected).map((r) =>
             r === 'left' ? 'x < 3' : r === 'middle' ? '3 < x < 5' : 'x > 5'
           ).join(' and ')}

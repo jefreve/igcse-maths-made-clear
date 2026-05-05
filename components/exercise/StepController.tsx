@@ -292,8 +292,8 @@ export default function StepController() {
             >
               {/* Step-specific context */}
               {stepNum === 1 && (
-                <div className="bg-navy-dark border border-white/10 rounded-lg p-4">
-                  <p className="text-white/60 text-xs font-semibold tracking-widest uppercase mb-3"
+                <div className="bg-slate-50 border border-border rounded-lg p-4">
+                  <p className="text-muted-foreground text-xs font-bold tracking-widest uppercase mb-3"
                     style={{ fontFamily: 'var(--font-montserrat)' }}>
                     Recall the rules
                   </p>
@@ -303,7 +303,7 @@ export default function StepController() {
                       'The expression inside a square root must be ≥ 0.',
                       'Since the square root is the denominator, it must be strictly > 0.',
                     ].map((rule, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm text-white/70"
+                      <li key={i} className="flex items-start gap-2 text-sm text-foreground/80 font-medium"
                         style={{ fontFamily: 'var(--font-montserrat)' }}>
                         <span className="text-gold mt-0.5 font-bold text-xs">{i + 1}.</span>
                         {rule}
@@ -315,14 +315,14 @@ export default function StepController() {
 
               {stepNum === 2 && (
                 <div className="space-y-4">
-                  <div className="bg-navy-dark border border-white/10 rounded-lg p-4">
-                    <p className="text-white/60 text-xs mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  <div className="bg-slate-50 border border-border rounded-lg p-4">
+                    <p className="text-muted-foreground text-xs mb-2 font-semibold" style={{ fontFamily: 'var(--font-montserrat)' }}>
                       We need to solve:
                     </p>
-                    <div className="text-lg">
+                    <div className="text-lg text-navy-dark font-medium">
                       <InlineMath math="x^{2} - 8x + 15 > 0" />
                     </div>
-                    <p className="text-white/50 text-xs mt-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                    <p className="text-muted-foreground text-xs mt-2 italic" style={{ fontFamily: 'var(--font-montserrat)' }}>
                       Hint: factorise as <InlineMath math="(x-3)(x-5) > 0" />
                     </p>
                   </div>
@@ -332,12 +332,12 @@ export default function StepController() {
               )}
 
               {stepNum === 3 && (
-                <div className="bg-navy-dark border border-white/10 rounded-lg p-4">
-                  <p className="text-white/60 text-xs mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                <div className="bg-slate-50 border border-border rounded-lg p-4">
+                  <p className="text-muted-foreground text-xs mb-2 font-semibold" style={{ fontFamily: 'var(--font-montserrat)' }}>
                     From Step 2, we know the solution is <InlineMath math="x < 3" /> or <InlineMath math="x > 5" />.
                     Express this as a domain in interval notation.
                   </p>
-                  <p className="text-white/40 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  <p className="text-muted-foreground/60 text-xs font-medium" style={{ fontFamily: 'var(--font-montserrat)' }}>
                     Remember: use ( ) for excluded endpoints, ∪ to join intervals.
                   </p>
                 </div>
@@ -374,7 +374,7 @@ export default function StepController() {
                   {step.hintsUsed >= MAX_HINTS && !step.feedbackReceived && (
                     <button
                       onClick={() => handleReveal(stepNum)}
-                      className="text-white/40 hover:text-white/60 text-xs underline underline-offset-2 transition-colors"
+                      className="text-muted-foreground/50 hover:text-muted-foreground text-xs underline underline-offset-2 transition-colors font-medium"
                       style={{ fontFamily: 'var(--font-montserrat)' }}
                     >
                       See answer
@@ -388,8 +388,8 @@ export default function StepController() {
                       inline-flex items-center gap-2 px-5 py-2.5 rounded-lg font-bold text-sm
                       transition-all duration-150
                       ${!isActive || !step.answer.trim() || isStreaming
-                        ? 'bg-white/10 text-white/30 cursor-not-allowed'
-                        : 'bg-gold hover:bg-gold-dark text-navy-dark cursor-pointer hover:scale-105 active:scale-95 shadow-md'}
+                        ? 'bg-slate-100 text-slate-300 cursor-not-allowed'
+                        : 'bg-gold hover:bg-gold-dark text-white cursor-pointer hover:scale-105 active:scale-95 shadow-md'}
                     `}
                     style={{ fontFamily: 'var(--font-montserrat)' }}
                   >

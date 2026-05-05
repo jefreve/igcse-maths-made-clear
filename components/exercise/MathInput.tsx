@@ -33,34 +33,34 @@ export default function MathInput({
         disabled={disabled}
         rows={rows}
         className={`
-          w-full bg-navy-dark border rounded-lg px-4 py-3 text-white text-sm resize-none
-          placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-gold/50
+          w-full bg-white border rounded-lg px-4 py-3 text-navy-dark text-sm resize-none
+          placeholder:text-muted-foreground/50 focus:outline-none focus:ring-2 focus:ring-gold/50
           disabled:opacity-50 disabled:cursor-not-allowed
           transition-colors duration-150
-          ${disabled ? 'border-white/10' : 'border-white/20 hover:border-white/30 focus:border-gold/50'}
+          ${disabled ? 'border-border' : 'border-border hover:border-gold/30 focus:border-gold/50'}
         `}
         style={{ fontFamily: 'var(--font-montserrat)' }}
       />
 
       {/* Typing guide */}
-      <p className="text-white/30 text-xs" style={{ fontFamily: 'var(--font-montserrat)' }}>
+      <p className="text-muted-foreground/60 text-xs font-medium" style={{ fontFamily: 'var(--font-montserrat)' }}>
         You can use: x^2 for x², sqrt() for √, &gt;= for ≥, &gt; for &gt;, ∪ for union,
         -inf/+inf for ±∞
       </p>
 
       {/* Live KaTeX preview */}
       {value.trim() && (
-        <div className="bg-navy-dark border border-white/10 rounded-lg px-4 py-3">
-          <p className="text-white/30 text-xs mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+        <div className="bg-slate-50 border border-border rounded-lg px-4 py-3 shadow-sm">
+          <p className="text-muted-foreground/50 text-[10px] font-bold uppercase mb-2 tracking-wider" style={{ fontFamily: 'var(--font-montserrat)' }}>
             Preview
           </p>
           {previewError ? (
-            <p className="text-white/40 text-sm italic">
+            <p className="text-muted-foreground/40 text-sm italic">
               (Cannot render preview for this input)
             </p>
           ) : (
             <div
-              className="text-white overflow-x-auto"
+              className="text-navy-dark overflow-x-auto text-lg"
               onError={() => setPreviewError(true)}
             >
               <InlineMath

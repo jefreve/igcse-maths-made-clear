@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function SiteHeader() {
   return (
-    <header className="w-full bg-navy border-b border-navy-light">
+    <header className="w-full bg-[#0C1F3C] border-b border-white/10">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-4">
         <div className="flex-shrink-0">
           <Image
@@ -24,14 +24,14 @@ export default function SiteHeader() {
             IGCSE
           </span>
           <span
-            className="text-white/80 text-sm leading-tight tracking-wide"
+            className="text-white/80 text-sm leading-tight tracking-wide font-medium"
             style={{ fontFamily: 'var(--font-montserrat)' }}
           >
             Maths Made Clear
           </span>
         </div>
         <div className="ml-auto hidden sm:block">
-          <span className="bg-gold text-navy-dark text-xs font-bold px-3 py-1 rounded-sm tracking-wider uppercase"
+          <span className="bg-gold text-[#0C1F3C] text-xs font-bold px-3 py-1 rounded-sm tracking-wider uppercase"
             style={{ fontFamily: 'var(--font-montserrat)' }}>
             Step by Step
           </span>
