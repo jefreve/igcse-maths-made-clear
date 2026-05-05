@@ -26,7 +26,6 @@ export interface TutorRequest {
   stepNumber: number;
   studentAnswer: string;
   errorCode: ErrorCode;
-  hintMode: boolean;
   conversationHistory: ConversationMessage[];
 }
 

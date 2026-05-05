@@ -11,6 +11,7 @@ import SignTable from './SignTable';
 import NumberLine from './NumberLine';
 import ProgressBar from './ProgressBar';
 import { detectError, isAnswerCorrect } from '@/lib/errorDetection';
+import { STEP_HINTS } from '@/lib/hints';
 import type { ExerciseState, StepAttempt, ConversationMessage, ErrorCode } from '@/lib/types';
 
 const initialAttempt = (): StepAttempt => ({
@@ -126,7 +127,6 @@ export default function StepController() {
     stepNumber: number,
     studentAnswer: string,
     errorCode: ErrorCode,
-    hintMode: boolean,
   ) => {
     abortRef.current?.abort();
     const controller = new AbortController();
@@ -134,7 +134,7 @@ export default function StepController() {
 
     setStreamingStep(stepNumber);
     setFeedbackMap((prev) => ({ ...prev, [stepNumber]: '' }));
-    setIsHintMap((prev) => ({ ...prev, [stepNumber]: hintMode }));
+    setIsHintMap((prev) => ({ ...prev, [stepNumber]: false }));
 
     try {
       const response = await fetch('/api/tutor', {
@@ -144,7 +144,6 @@ export default function StepController() {
           stepNumber,
           studentAnswer,
           errorCode,
-          hintMode,
           conversationHistory,
         } satisfies import('@/lib/types').TutorRequest),
         signal: controller.signal,
@@ -228,17 +227,23 @@ export default function StepController() {
         router.push(`/results?data=${resultsData}`);
       }
     } else {
-      streamFeedback(stepNum, answer, errorCode, false);
+      streamFeedback(stepNum, answer, errorCode);
     }
   }, [state, streamFeedback, router]);
 
   const handleHint = useCallback((stepNum: number) => {
     const idx = stepNum - 1;
-    if (state.steps[idx].hintsUsed >= MAX_HINTS) return;
+    const hintsUsed = state.steps[idx].hintsUsed;
+    if (hintsUsed >= MAX_HINTS) return;
+
     dispatch({ type: 'INCREMENT_HINT', stepIndex: idx });
-    const answer = state.steps[idx].answer || '(no answer yet)';
-    streamFeedback(stepNum, answer, null, true);
-  }, [state, streamFeedback]);
+
+    const hints = STEP_HINTS[stepNum];
+    const hintText = hints?.[hintsUsed] ?? 'No more hints available for this step.';
+
+    setIsHintMap((prev) => ({ ...prev, [stepNum]: true }));
+    setFeedbackMap((prev) => ({ ...prev, [stepNum]: hintText }));
+  }, [state]);
 
   const handleReveal = useCallback((stepNum: number) => {
     const idx = stepNum - 1;
