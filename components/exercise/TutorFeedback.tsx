@@ -21,40 +21,40 @@ export default function TutorFeedback({ text, isStreaming, isHint = false }: Tut
   if (!text && !isStreaming) return null;
 
   return (
-    <div className="bg-slate-50 border-l-4 border-gold rounded-r-xl p-5 animate-fade-in shadow-sm">
-      <div className="flex items-start gap-3">
-        <div className="flex-shrink-0 w-7 h-7 bg-white border border-gold/30 rounded-full flex items-center justify-center mt-0.5 shadow-sm">
+    <div className="bg-[#f0f7ff]/60 backdrop-blur-sm border-2 border-blue-100 rounded-[2rem] p-8 animate-fade-in shadow-xl shadow-blue-900/5">
+      <div className="flex items-start gap-5">
+        <div className="flex-shrink-0 w-10 h-10 bg-white border-2 border-blue-50 rounded-2xl flex items-center justify-center mt-0.5 shadow-sm">
           {isStreaming && !text ? (
-            <Loader2 className="w-3.5 h-3.5 text-gold animate-spin" />
+            <Loader2 className="w-5 h-5 text-blue-500 animate-spin" />
           ) : (
-            <Bot className="w-3.5 h-3.5 text-gold" />
+            <Bot className="w-5 h-5 text-blue-500" />
           )}
         </div>
 
         <div className="flex-1 min-w-0">
-          <p className="text-gold-dark text-xs font-bold tracking-widest uppercase mb-2"
+          <p className="text-blue-800/40 text-[10px] font-black tracking-[0.3em] uppercase mb-3"
             style={{ fontFamily: 'var(--font-montserrat)' }}>
-            {isHint ? 'Tutor Hint' : 'Tutor Feedback'}
+            {isHint ? 'AI Hint' : 'AI Analysis'}
           </p>
 
           {isStreaming && !text ? (
-            <div className="flex items-center gap-1.5 py-1">
+            <div className="flex items-center gap-2 py-2">
               {[0, 1, 2].map((i) => (
                 <span
                   key={i}
-                  className="w-1.5 h-1.5 bg-gold/60 rounded-full animate-pulse-slow"
-                  style={{ animationDelay: `${i * 200}ms` }}
+                  className="w-2 h-2 bg-blue-300 rounded-full animate-bounce"
+                  style={{ animationDelay: `${i * 150}ms` }}
                 />
               ))}
             </div>
           ) : (
             <p
-              className="text-foreground font-medium text-sm leading-relaxed whitespace-pre-wrap"
+              className="text-navy-dark font-medium text-base leading-relaxed whitespace-pre-wrap"
               style={{ fontFamily: 'var(--font-montserrat)' }}
             >
               {text}
               {isStreaming && (
-                <span className="inline-block w-0.5 h-4 bg-gold ml-0.5 animate-pulse align-text-bottom" />
+                <span className="inline-block w-1 h-5 bg-blue-400 ml-1 animate-pulse align-middle rounded-full" />
               )}
             </p>
           )}

@@ -44,16 +44,16 @@ function getDimScore(step: StepAttempt): DimScore {
 
 function ScoreBadge({ score }: { score: DimScore }) {
   const config = {
-    correct: { icon: CheckCircle, colour: 'text-success', bg: 'bg-success/10 border-success/30', label: 'Correct' },
-    guided: { icon: AlertCircle, colour: 'text-gold-dark', bg: 'bg-gold/10 border-gold/30', label: 'With guidance' },
-    revealed: { icon: XCircle, colour: 'text-error', bg: 'bg-error/10 border-error/30', label: 'Answer shown' },
+    correct: { icon: CheckCircle, colour: 'text-success', bg: 'bg-success/5 border-success/10', label: 'Perfect' },
+    guided: { icon: AlertCircle, colour: 'text-gold-dark', bg: 'bg-gold/5 border-gold/10', label: 'Guided' },
+    revealed: { icon: XCircle, colour: 'text-error', bg: 'bg-error/5 border-error/10', label: 'Review Needed' },
   }[score];
 
   const Icon = config.icon;
   return (
-    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10px] font-bold uppercase tracking-wider ${config.bg} ${config.colour}`}
+    <span className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-[10px] font-black uppercase tracking-[0.2em] ${config.bg} ${config.colour}`}
       style={{ fontFamily: 'var(--font-montserrat)' }}>
-      <Icon className="w-3 h-3" />
+      <Icon className="w-3.5 h-3.5" />
       {config.label}
     </span>
   );
@@ -76,79 +76,69 @@ export default function AssessmentReport({ steps, sessionDuration }: ReportProps
   const percentage = Math.round((overallScore / maxScore) * 100);
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-12 animate-fade-in pb-20">
       {/* Summary header */}
-      <div className="bg-white border border-border rounded-xl p-8 text-center shadow-md">
-        <div className="inline-flex items-center gap-2 bg-slate-50 border border-border rounded-full px-4 py-1.5 mb-6">
-          <span className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase"
+      <div className="bg-white border-4 border-slate-50 rounded-[3rem] p-12 text-center shadow-2xl shadow-slate-200/50 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-navy-dark via-gold to-navy-dark opacity-10" />
+        <div className="inline-flex items-center gap-2 bg-slate-50 border border-slate-100 rounded-full px-6 py-2 mb-8">
+          <span className="text-slate-400 text-[11px] font-black tracking-[0.3em] uppercase"
             style={{ fontFamily: 'var(--font-montserrat)' }}>
-            Exercise Complete
+            Session Overview
           </span>
         </div>
-        <div className="text-6xl font-bold text-gold mb-2" style={{ fontFamily: 'var(--font-spartan)' }}>
-          {percentage}%
+        <div className="text-8xl font-black text-navy-dark mb-4 tracking-tighter" style={{ fontFamily: 'var(--font-spartan)' }}>
+          {percentage}<span className="text-gold">%</span>
         </div>
-        <p className="text-muted-foreground text-sm font-semibold" style={{ fontFamily: 'var(--font-montserrat)' }}>
-          {overallScore} / {maxScore} points
+        <p className="text-slate-400 font-bold text-lg mb-8" style={{ fontFamily: 'var(--font-montserrat)' }}>
+          Score: {overallScore} / {maxScore}
         </p>
 
-        <div className="flex items-center justify-center gap-2 mt-6 text-muted-foreground/50 text-xs font-medium"
+        <div className="flex items-center justify-center gap-4 text-slate-300 text-xs font-bold uppercase tracking-widest"
           style={{ fontFamily: 'var(--font-montserrat)' }}>
-          <Clock className="w-3.5 h-3.5" />
-          Time taken: {formatDuration(sessionDuration)}
+          <Clock className="w-4 h-4 text-gold" />
+          Completed in {formatDuration(sessionDuration)}
         </div>
-      </div>
-
-      {/* Correct answer */}
-      <div className="bg-success/5 border border-success/20 rounded-xl p-6 shadow-sm">
-        <p className="text-success text-[10px] font-bold tracking-widest uppercase mb-4"
-          style={{ fontFamily: 'var(--font-montserrat)' }}>
-          Correct Answer
-        </p>
-        <div className="text-2xl flex justify-center text-navy-dark font-medium">
-          <InlineMath math="(-\infty,\, 3) \cup (5,\, +\infty)" />
-        </div>
-        <p className="text-muted-foreground/70 text-xs text-center mt-4 italic" style={{ fontFamily: 'var(--font-montserrat)' }}>
-          Endpoints 3 and 5 are excluded because the denominator cannot equal zero.
-        </p>
       </div>
 
       {/* Per-step breakdown */}
-      <div className="space-y-6">
-        <h2 className="text-foreground font-bold text-xl px-1" style={{ fontFamily: 'var(--font-montserrat)' }}>
-          Step-by-Step Breakdown
-        </h2>
+      <div className="space-y-8">
+        <div className="flex items-center justify-between px-4">
+          <h2 className="text-navy-dark font-black text-3xl tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            Step Details
+          </h2>
+          <div className="w-12 h-1 bg-gold/30 rounded-full" />
+        </div>
 
         {steps.map((step, idx) => {
           const dimScore = getDimScore(step);
           const dims = STEP_DIMENSIONS[idx];
 
           return (
-            <div key={idx} className="bg-white border border-border rounded-xl overflow-hidden shadow-sm">
-              <div className="flex items-center gap-3 px-6 py-4 border-b border-border bg-slate-50/30">
-                <div className="w-8 h-8 rounded-full bg-gold text-white font-bold text-sm flex items-center justify-center flex-shrink-0 shadow-sm"
+            <div key={idx} className="bg-white border-2 border-slate-50 rounded-[2.5rem] overflow-hidden shadow-xl shadow-slate-100/50">
+              <div className="flex items-center gap-6 px-10 py-8 border-b border-slate-50 bg-slate-50/20">
+                <div className="w-12 h-12 rounded-2xl bg-navy-dark text-white font-black text-xl flex items-center justify-center flex-shrink-0 shadow-lg"
                   style={{ fontFamily: 'var(--font-spartan)' }}>
                   {idx + 1}
                 </div>
-                <h3 className="text-foreground font-bold text-sm flex-1"
+                <h3 className="text-navy-dark font-black text-lg flex-1"
                   style={{ fontFamily: 'var(--font-montserrat)' }}>
                   {STEP_TITLES[idx]}
                 </h3>
                 <ScoreBadge score={dimScore} />
               </div>
 
-              <div className="p-6 grid grid-cols-1 sm:grid-cols-3 gap-6">
+              <div className="p-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
                 {(['reasoning', 'algebra', 'notation'] as const).map((dim) => (
-                  <div key={dim} className="bg-slate-50 border border-border/50 rounded-lg p-5">
-                    <p className="text-muted-foreground/50 text-[10px] font-bold tracking-widest uppercase mb-3"
+                  <div key={dim} className="bg-slate-50/40 border border-slate-100 rounded-[2rem] p-8 transition-transform hover:scale-[1.02]">
+                    <p className="text-slate-300 text-[10px] font-black tracking-[0.2em] uppercase mb-5"
                       style={{ fontFamily: 'var(--font-montserrat)' }}>
                       {dim}
                     </p>
-                    <p className="text-foreground/80 text-xs leading-relaxed font-medium mb-4"
+                    <p className="text-navy-dark font-bold text-sm leading-relaxed mb-6 min-h-[4em]"
                       style={{ fontFamily: 'var(--font-montserrat)' }}>
                       {dims[dim]}
                     </p>
-                    <div className="pt-2 border-t border-border/40">
+                    <div className="pt-5 border-t border-slate-100">
                       <ScoreBadge score={dimScore} />
                     </div>
                   </div>
@@ -156,13 +146,15 @@ export default function AssessmentReport({ steps, sessionDuration }: ReportProps
               </div>
 
               {step.answer && (
-                <div className="px-6 pb-6 pt-2 border-t border-border/30">
-                  <p className="text-muted-foreground/40 text-[10px] font-bold uppercase mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                    Your answer
-                  </p>
-                  <p className="text-foreground/70 text-sm italic font-medium bg-slate-50 p-3 rounded-lg border border-border/50">
-                    &ldquo;{step.answer}&rdquo;
-                  </p>
+                <div className="px-10 pb-10">
+                  <div className="bg-[#f0f7ff]/50 border-2 border-blue-50 rounded-[1.5rem] p-6">
+                    <p className="text-blue-900/30 text-[10px] font-black uppercase tracking-widest mb-3" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                      Your Answer
+                    </p>
+                    <p className="text-navy-dark font-bold text-base italic">
+                      &ldquo;{step.answer}&rdquo;
+                    </p>
+                  </div>
                 </div>
               )}
             </div>
@@ -170,42 +162,22 @@ export default function AssessmentReport({ steps, sessionDuration }: ReportProps
         })}
       </div>
 
-      {/* Hints summary */}
-      <div className="bg-white border border-border rounded-xl p-6 shadow-sm">
-        <p className="text-muted-foreground/60 text-[10px] font-bold tracking-widest uppercase mb-6"
-          style={{ fontFamily: 'var(--font-montserrat)' }}>
-          Hints Summary
-        </p>
-        <div className="flex gap-12 px-2">
-          {steps.map((step, idx) => (
-            <div key={idx} className="flex flex-col items-center">
-              <div className="text-3xl font-bold text-gold mb-1" style={{ fontFamily: 'var(--font-spartan)' }}>
-                {step.hintsUsed}
-              </div>
-              <p className="text-muted-foreground/50 text-[10px] font-bold uppercase" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                Step {idx + 1}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* CTA */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8 pb-12">
+      <div className="flex flex-col sm:flex-row gap-8 justify-center pt-10">
         <Link
           href="/exercise"
-          className="inline-flex items-center justify-center gap-2 border-2 border-gold text-gold-dark hover:bg-gold/5 px-8 py-3 rounded-lg font-bold text-sm transition-all"
+          className="group inline-flex items-center justify-center gap-4 border-4 border-gold text-gold-dark hover:bg-gold hover:text-white px-12 py-5 rounded-[2rem] font-black text-base transition-all duration-300 shadow-xl shadow-gold/10"
           style={{ fontFamily: 'var(--font-montserrat)' }}
         >
-          <RotateCcw className="w-4 h-4" />
-          Try Again
+          <RotateCcw className="w-6 h-6 group-hover:rotate-180 transition-transform duration-500" />
+          Retake Quiz
         </Link>
         <Link
           href="/"
-          className="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-dark text-white px-8 py-3 rounded-lg font-bold text-sm transition-all shadow-md hover:scale-105 active:scale-95"
+          className="inline-flex items-center justify-center gap-4 bg-navy-dark hover:bg-navy text-white px-12 py-5 rounded-[2rem] font-black text-base transition-all shadow-2xl shadow-navy-dark/30 hover:-translate-y-1"
           style={{ fontFamily: 'var(--font-montserrat)' }}
         >
-          Back to Home
+          Dashboard
         </Link>
       </div>
     </div>

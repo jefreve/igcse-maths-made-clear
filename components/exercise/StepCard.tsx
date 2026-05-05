@@ -23,65 +23,67 @@ export default function StepCard({
   return (
     <div
       className={`
-        bg-white rounded-xl border transition-all duration-300
+        rounded-[2.5rem] border transition-all duration-500
         ${isActive
-          ? 'border-gold/50 shadow-lg shadow-gold/10'
+          ? 'bg-white border-slate-200 shadow-2xl shadow-slate-200/60 scale-[1.01]'
           : isCompleted
-            ? 'border-success/30 opacity-100'
-            : 'border-border opacity-50'}
+            ? 'bg-white/60 border-slate-100 opacity-100 shadow-sm'
+            : 'bg-slate-50/50 border-transparent opacity-60'}
       `}
     >
       {/* Card header */}
-      <div className="flex items-start gap-4 p-5 border-b border-border">
+      <div className={`flex items-start gap-6 p-8 ${isActive ? 'border-b border-slate-50' : ''}`}>
         <div
           className={`
-            w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm
+            w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 font-bold text-lg
+            transition-all duration-500
             ${isCompleted
-              ? 'bg-success text-white'
+              ? 'bg-success text-white rotate-[360deg]'
               : isActive
-                ? 'bg-gold text-white'
-                : 'bg-slate-100 border border-border text-muted-foreground'}
+                ? 'bg-navy-dark text-white shadow-xl shadow-navy-dark/20 scale-110'
+                : 'bg-white border border-slate-200 text-slate-300'}
           `}
           style={{ fontFamily: 'var(--font-spartan)' }}
         >
-          {isCompleted ? <CheckCircle className="w-4 h-4" /> : stepNumber}
+          {isCompleted ? <CheckCircle className="w-6 h-6" /> : stepNumber}
         </div>
 
-        <div className="flex-1 min-w-0">
-          <h3 className="text-foreground font-bold text-base mb-0.5"
+        <div className="flex-1 min-w-0 pt-1">
+          <h3 className={`font-bold text-xl mb-1 transition-colors duration-300 ${isActive ? 'text-navy-dark' : 'text-slate-400'}`}
             style={{ fontFamily: 'var(--font-montserrat)' }}>
             {title}
           </h3>
-          <p className="text-muted-foreground text-sm leading-relaxed"
+          <p className={`text-base leading-relaxed transition-colors duration-300 ${isActive ? 'text-slate-500' : 'text-slate-400'}`}
             style={{ fontFamily: 'var(--font-montserrat)' }}>
             {description}
           </p>
         </div>
 
         {isCompleted && (
-          <span className="flex-shrink-0 bg-success/10 text-success text-xs font-semibold px-2.5 py-1 rounded-full border border-success/20"
+          <span className="flex-shrink-0 bg-success/10 text-success text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full border border-success/10"
             style={{ fontFamily: 'var(--font-montserrat)' }}>
-            Done
+            Complete
           </span>
         )}
         {!isCompleted && !isActive && (
-          <Circle className="w-4 h-4 text-muted-foreground/30 flex-shrink-0 mt-1" />
+          <Circle className="w-5 h-5 text-slate-200 flex-shrink-0 mt-2" />
         )}
       </div>
 
       {/* Card body — only visible when active */}
       {isActive && children && (
-        <div className="p-5 space-y-5 animate-fade-in">
+        <div className="p-8 pt-4 space-y-8 animate-fade-in bg-white rounded-b-[2.5rem]">
           {children}
         </div>
       )}
 
       {/* Completed summary */}
       {isCompleted && (
-        <div className="px-5 py-3 animate-fade-in">
-          <p className="text-success/70 text-xs font-medium"
+        <div className="px-8 py-5 animate-fade-in border-t border-slate-50 bg-slate-50/20 rounded-b-[2.5rem]">
+          <p className="text-success/60 text-xs font-bold uppercase tracking-widest flex items-center gap-2"
             style={{ fontFamily: 'var(--font-montserrat)' }}>
-            This step has been completed correctly.
+            <div className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
+            Great progress! Step verified.
           </p>
         </div>
       )}

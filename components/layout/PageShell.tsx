@@ -7,7 +7,16 @@ interface PageShellProps {
 
 export default function PageShell({ children, maxWidth = 'max-w-4xl' }: PageShellProps) {
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div 
+      className="min-h-screen flex flex-col"
+      style={{
+        backgroundImage: "linear-gradient(to right, rgba(203, 213, 225, 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgba(203, 213, 225, 0.4) 1px, transparent 1px), url('/sfondo.png')",
+        backgroundSize: "40px 40px, 40px 40px, cover",
+        backgroundAttachment: "fixed",
+        backgroundPosition: "center",
+        backgroundColor: "#f8fafc"
+      }}
+    >
       <SiteHeader />
       <main className={`flex-1 w-full ${maxWidth} mx-auto px-4 sm:px-6 py-8`}>
         {children}

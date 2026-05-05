@@ -117,8 +117,15 @@
   }
 
   body {
-    background-color: #ffffff;
-    color: #0C1F3C; /* Navy dark */
+    background-color: #f8fafc;
+    background-image: 
+      url('/sfondo.png'),
+      linear-gradient(to right, rgba(203, 213, 225, 0.4) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(203, 213, 225, 0.4) 1px, transparent 1px);
+    background-size: cover, 40px 40px, 40px 40px;
+    background-attachment: fixed;
+    background-position: center;
+    color: var(--foreground);
     font-family: var(--font-montserrat), sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
