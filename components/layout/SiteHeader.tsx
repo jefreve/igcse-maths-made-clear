@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 export default function SiteHeader() {
   return (
-    <header className="w-full bg-[#0C1F3C] border-b border-white/10">
+    <header className="w-full bg-[#0C1F3C]/95 backdrop-blur-md border-b border-white/10">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center gap-4">
         <div className="flex-shrink-0">
           <Image

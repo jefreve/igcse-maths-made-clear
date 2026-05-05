@@ -21,7 +21,7 @@ export default function PageShell({ children, maxWidth = 'max-w-4xl' }: PageShel
       <main className={`flex-1 w-full ${maxWidth} mx-auto px-4 sm:px-6 py-8`}>
         {children}
       </main>
-      <footer className="w-full bg-[#0C1F3C] border-t border-white/10 py-6">
+      <footer className="w-full bg-[#0C1F3C]/95 backdrop-blur-md border-t border-white/10 py-6">
         <p className="text-center text-white/40 text-[10px] font-bold uppercase tracking-widest" style={{ fontFamily: 'var(--font-montserrat)' }}>
           IGCSE Maths Made Clear &mdash; Mistakes mean you&apos;re actually doing it
         </p>
